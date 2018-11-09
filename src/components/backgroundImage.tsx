@@ -7,7 +7,11 @@ export default class BackgroundImage extends React.Component<Props> {
     render() {
         return (
             <React.Fragment>
-                <Image source={this.props.src} style={style.background} />
+                <Image
+                    source={this.props.src}
+                    style={style.background}
+                    blurRadius={5}
+                />
                 <View style={style.bgOverlay} />
                 <View style={StyleSheet.absoluteFillObject}>
                     {this.props.children}
@@ -26,6 +30,6 @@ const style = StyleSheet.create({
     },
     bgOverlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)'
+        backgroundColor: 'rgba(0, 0, 0, 0.75)'
     }
 });

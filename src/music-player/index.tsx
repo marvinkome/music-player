@@ -3,12 +3,14 @@ import Background from '../components/backgroundImage';
 import { View, Text, StyleSheet } from 'react-native';
 
 import Header from './header';
+import CoverArt from './coverArt';
 
 export default class MusicPlayer extends React.Component {
     render() {
         return (
             <Background src={require('../static/trench.jpeg')}>
                 <Header message="Playing from charts" subtitle="Dance Rewind" />
+                <CoverArt src={require('../static/trench.jpeg')} />
             </Background>
         );
     }
