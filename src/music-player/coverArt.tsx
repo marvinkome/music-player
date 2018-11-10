@@ -17,7 +17,7 @@ export default class CoverArt extends React.Component<Props> {
     }
 }
 
-const padding = 40;
+const padding = 60;
 const { width } = Dimensions.get('window');
 const style = StyleSheet.create({
     container: {
