@@ -14,21 +14,37 @@ const minAndSec = (position: number) => [
     pad(position % 60, 2)
 ];
 
-export default class SeekBar extends React.Component {
+type Props = {
+    currentPosition: number;
+    trackLength: number;
+    onSeek: (time: number) => void;
+};
+export default class SeekBar extends React.Component<Props> {
     render() {
+        const { currentPosition, trackLength, onSeek } = this.props;
+        const elapsed = minAndSec(this.props.currentPosition);
+        const remaining = minAndSec(trackLength - currentPosition);
+
         return (
             <View style={style.container}>
+                {/* timer */}
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={style.text}>0:24</Text>
+                    <Text style={style.text}>
+                        {elapsed[0] + ':' + elapsed[1]}
+                    </Text>
+
                     <View style={{ flex: 1 }} />
-                    <Text style={[style.text, { width: 40 }]}>3:12</Text>
+
+                    <Text style={[style.text, { width: 40 }]}>
+                        {trackLength > 1 &&
+                            '-' + remaining[0] + ':' + remaining[1]}
+                    </Text>
                 </View>
 
                 <Slider
-                    maximumValue={30}
-                    onSlidingStart={null}
-                    onSlidingComplete={null}
-                    value={null}
+                    maximumValue={Math.max(trackLength, 1, currentPosition + 1)}
+                    onSlidingComplete={onSeek}
+                    value={currentPosition}
                     style={style.slider}
                     minimumTrackTintColor="#fff"
                     maximumTrackTintColor="rgba(255, 255, 255, 0.14)"
