@@ -49,6 +49,7 @@ export default class Head extends React.Component<Props> {
 
 const style = StyleSheet.create({
     outerHeader: {
+        marginTop: 20,
         backgroundColor: 'transparent',
         borderBottomWidth: 0
     },

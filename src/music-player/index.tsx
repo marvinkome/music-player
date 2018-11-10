@@ -44,11 +44,9 @@ export default class MusicPlayer extends React.Component<{}, state> {
     };
 
     seek = (time: number) => {
-        this.setState({ paused: true }, () => {
-            time = Math.round(time);
-            this.videoRef.current && this.videoRef.current.seek(time);
-            this.setState({ currentPosition: time, paused: false });
-        });
+        time = Math.round(time);
+        this.videoRef.current && this.videoRef.current.seek(time);
+        this.setState({ currentPosition: time, paused: false });
     };
 
     renderPlayer() {
@@ -73,10 +71,12 @@ export default class MusicPlayer extends React.Component<{}, state> {
                     currentPosition={this.state.currentPosition}
                     trackLength={this.state.totalLength}
                     onSeek={this.seek}
+                    onSlide={() => this.setState({ paused: true })}
                 />
                 <Controls
                     paused={this.state.paused}
-                    togglePause={this.togglePause}
+                    play={() => this.setState({ paused: false })}
+                    pause={() => this.setState({ paused: true })}
                 />
                 {this.renderPlayer()}
             </Background>

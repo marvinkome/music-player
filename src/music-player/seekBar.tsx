@@ -18,12 +18,13 @@ type Props = {
     currentPosition: number;
     trackLength: number;
     onSeek: (time: number) => void;
+    onSlide: () => void;
 };
 export default class SeekBar extends React.Component<Props> {
     render() {
         const { currentPosition, trackLength, onSeek } = this.props;
         const elapsed = minAndSec(this.props.currentPosition);
-        const remaining = minAndSec(trackLength - currentPosition);
+        const remaining = minAndSec(trackLength);
 
         return (
             <View style={style.container}>
@@ -36,14 +37,14 @@ export default class SeekBar extends React.Component<Props> {
                     <View style={{ flex: 1 }} />
 
                     <Text style={[style.text, { width: 40 }]}>
-                        {trackLength > 1 &&
-                            '-' + remaining[0] + ':' + remaining[1]}
+                        {trackLength > 1 && remaining[0] + ':' + remaining[1]}
                     </Text>
                 </View>
 
                 <Slider
                     maximumValue={Math.max(trackLength, 1, currentPosition + 1)}
                     onSlidingComplete={onSeek}
+                    onSlidingStart={this.props.onSlide}
                     value={currentPosition}
                     style={style.slider}
                     minimumTrackTintColor="#fff"

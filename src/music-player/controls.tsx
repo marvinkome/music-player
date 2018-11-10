@@ -4,7 +4,8 @@ import { Icon } from 'react-native-elements';
 
 type Props = {
     paused: boolean;
-    togglePause: () => void;
+    pause: () => void;
+    play: () => void;
 };
 export default class Controls extends React.Component<Props> {
     render() {
@@ -35,15 +36,19 @@ export default class Controls extends React.Component<Props> {
                 <View style={{ width: 20 }} />
 
                 {/* play.pause */}
-                <TouchableOpacity onPress={this.props.togglePause}>
-                    <View style={style.playButton}>
-                        <Icon
-                            name={this.props.paused ? 'play-arrow' : 'pause'}
-                            color="#fff"
-                            size={48}
-                        />
-                    </View>
-                </TouchableOpacity>
+                {this.props.paused ? (
+                    <TouchableOpacity onPress={this.props.play}>
+                        <View style={style.playButton}>
+                            <Icon name="play-arrow" color="#fff" size={48} />
+                        </View>
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity onPress={this.props.pause}>
+                        <View style={style.playButton}>
+                            <Icon name="pause" color="#fff" size={48} />
+                        </View>
+                    </TouchableOpacity>
+                )}
 
                 <View style={{ width: 20 }} />
 
