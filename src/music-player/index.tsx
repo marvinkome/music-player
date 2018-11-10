@@ -36,7 +36,7 @@ export default class MusicPlayer extends React.Component<{}, state> {
         this.setState((ps) => ({ paused: !ps.paused }));
     };
     setDuration = (data: OnLoadData) => {
-        this.setState({ totalLength: Math.floor(data.duration) });
+        this.setState({ totalLength: Math.round(data.duration) });
     };
 
     setTime = (data: any) => {
@@ -58,6 +58,7 @@ export default class MusicPlayer extends React.Component<{}, state> {
                 style={{ width: 0, height: 0 }}
                 onLoad={this.setDuration}
                 onProgress={this.setTime}
+                onEnd={() => this.setState({ paused: true })}
             />
         );
     }
